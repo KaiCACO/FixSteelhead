@@ -1,12 +1,12 @@
 {
     "manifest_version": 3,
     "name": "Fix Steelhead Frontend",
-    "version": "1.6.9",
+    "version": "0.8",
     "author": "Kai Sereni",
     "homepage_url": "https://cascadesacademy.myschoolapp.com/app/student",
     "content_scripts": [
         {
-            "matches": ["https://cascadesacademy.myschoolapp.com/app/*"],
+            "matches": ["<all_urls>"],
             "js": ["src/content.js"]
         }],
     "web_accessible_resources": [
@@ -20,10 +20,10 @@
         "default_popup": "src/popup.html",
         "default_icon": "src/resources/icons/icon.png"
         },
-    "icons": {
-        "16": "src/resources/icons/icon-16.png",
-        "32": "src/resources/icons/icon-32.png",
-        "48": "src/resources/icons/icon-48.png",
-        "128": "src/resources/icons/icon-128.png"
-    }
+        "icons": {
+            "16": "src/resources/icons/icon-16.png",
+            "32": "src/resources/icons/icon-32.png",
+            "48": "src/resources/icons/icon-48.png",
+            "128": "src/resources/icons/icon-128.png"
+        }
 }

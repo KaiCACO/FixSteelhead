@@ -57,7 +57,7 @@ function assignmentCenter() {
     //Defines a bunch of nodes to change
     const body = document.getElementsByTagName("body")[0];
     const headerContainer = document.getElementById("site-header-container");
-    const logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
+    //const logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
     const navContainer = document.getElementById("site-nav-container");
     const chalkboardImage = document.getElementById("group-header-Classes").getElementsByTagName("img")[0];
     const groupsImage = document.getElementById("group-header-Groups").getElementsByTagName("img")[0];
@@ -77,12 +77,14 @@ function assignmentCenter() {
     const assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
     const assignmentSortText = assignmentSort.getElementsByClassName("add-existing-items-header")[0].getElementsByTagName("th");
     const assignmentsHeaderBackground = document.getElementsByClassName("bb-tile-title")[0];
+    const dateTitle = document.getElementById("date-display-label");
     const assignments = document.getElementById("assignment-center");
     const assignmentItems = document.getElementById("assignment-center-assignment-items").getElementsByTagName("tr");
     const assignmentFilterButtons1 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("label");
     const assignmentFilterButtons2 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("button");
     const assignmentFilterButtons3 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("a");
-    const uselessButtons1 = document.getElementsByClassName("col-md-4")[0]
+    const uselessButtons1 = document.getElementsByClassName("col-md-4")[0];
+    const viewButtons = document.getElementsByClassName("btn-default");
     const assignmentsBackground = document.getElementsByClassName("bb-tile-content")[0];
     const assignmentsHeader = document.getElementsByClassName("bb-tile-header")[0];
 
@@ -103,6 +105,7 @@ function assignmentCenter() {
     bulkedit(assignmentFilterButtons1, { "color": "white", "background-color": "#262935"}, "elements", null);
     bulkedit(assignmentFilterButtons2, { "color": "white", "background-color": "#262935"}, "elements", null);
     bulkedit(assignmentFilterButtons3, { "color": "white", "background-color": "#262935"}, "elements", null);
+    bulkedit(viewButtons, { "border-color": "transparent" }, "elements", null);
     for (let i = 0; i < assignmentItems.length; i = (i + 2)) {
         css(assignmentItems[i], {
             "background-color": "#414a72",
@@ -149,7 +152,7 @@ function assignmentCenter() {
     newsImage.src = file("newspaper-icon.png");
     calendarImage.src = file("calendar-icon.png");
     directoryImage.src = file("directory-icon.png");
-    logoImage.src = file("kaiscades-academy.png");
+    //logoImage.src = file("kaiscades-academy.png");
 
     //Edit the css of a bunch of elements using the css() function
     css(chalkboardImage, {
@@ -194,12 +197,18 @@ function assignmentCenter() {
     css(assignmentFiltersHeader, {
         "background-color": "#293b72",
         "border-top": "none",
-        "border-bottom": "none"
+        "border-bottom": "none",
+        "border-style": "outset",
+        "border-color": "white",
+        'border-radius': '5px 5px 0px 0px',
     })
     css(assignmentFilters, {
         "background-color": "#293b72",
         "border-top": "none",
-        "border-bottom": "none"
+        "border-bottom": "none",
+        "border-style": "outset",
+        "border-color": "white",
+        "border-top-color": "transparent"
     })
     css(assignmentSort, {
         "background-color": "#2b2b3a",
@@ -212,6 +221,10 @@ function assignmentCenter() {
         'border': '2px solid white',
         'border-radius': '25px 25px 0px 0px',
     });
+    css(dateTitle, {
+        "font-family": "raleway",
+        "color": "white"
+    })
     css(assignments, {
         "font-family": "raleway"
     });
@@ -249,6 +262,15 @@ function init() {
 
 }
 
-document.body.onload = function() {
-    setTimeout(() => {init();}, 1500);
+function waitForTarget() {
+    let el = document.getElementById("month-view");
+    if (!(el==null)) {
+        setTimeout(() => {init();}, 200);
+    }
+    else {
+        setTimeout(() => {waitForTarget();}, 200);
+    }
+
 };
+
+waitForTarget();
