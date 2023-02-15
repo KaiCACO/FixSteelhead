@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <!-- Code created by Kai Sereni in February 2023 -->
 <html>
-<script type="text/javascript" src="resources/popup.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/styles.css">
     <body id="body">
 		<div class="dropdown-wrapper">
         	<img src="resources/bar-icon.png" width="40px" height="40px" class="dropdown" alt="bars-icon">
 			<div class="dropdown-content">
-				<a href="#home">Home</a>
-				<a href="#dppearance">Appearance</a>
-				<a href="#defaults">Default Filters</a>
+				<button href="#home" id="home-button">Home</button>
+				<button href="#appearance" id="appearance-button">Appearance</button>
+				<button href="#defaults" id="defaults-button">Default Filters</button>
 			</div>
 		</div>
-        <h1 id="title">This browser extension fixes Steelhead Connect's ugly UI.</h1>
-        <h3 id="subtitle">Coded by Kai Sereni in February 2023.</h3>
-        <p id="text">To read all of this browser extension's documented code, go to the GitHub. If the browser extension ever stops working, reload the page.</p>
-        <center>
-            <a href="https://github.com/KaiCACO/FixSteelhead" target="_blank">
-                <img src="resources/github-icon.png" id="github-icon" alt="github-icon">
-            </a>
-        </center>
+        <div id="home" class="tab">
+            <h1 id="title">This browser extension fixes Steelhead Connect's ugly UI.</h1>
+            <h3 id="subtitle">Coded by Kai Sereni in February 2023.</h3>
+            <p id="text">To read all of this browser extension's documented code, go to the GitHub. If the browser extension ever stops working, reload the page.</p>
+            <center>
+                <a href="https://github.com/KaiCACO/FixSteelhead" target="_blank">
+                    <img src="resources/github-icon.png" id="github-icon" alt="github-icon">
+                </a>
+            </center>
+        </div>
+        <div id="appearance" class="tab">
+            <p>Appearance tab</p>
+        </div>
+        <div id="defaults" class="tab">
+            <p>Defaults tab</p>
+        </div>
+    <script type="text/javascript" src="resources/popup.js"></script>
     </body>
+
 </html>

@@ -34,7 +34,7 @@
 	transition-timing-function: ease-in-out;
 }
 
-.dropdown-content a {
+.dropdown-content button {
 	font-family: "Roboto Mono";
 	font-size: 12pt;
 	text-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
@@ -54,30 +54,36 @@
     transform-origin: top center;
 }
 
-.dropdown-content a {
-	background-color:rgba(232,234,244,1.00);
+.dropdown-content button {
+	background-color:rgba(228,231,244,1.00);
 	transform: none;
 	transition-duration: 0.4s;
 	text-decoration: none;
+    cursor: pointer;
+}
+
+.dropdown-wrapper button {
+	border: none;
+    width: 100%;
+    text-align: left;
 }
 
 .dropdown-wrapper {
 	width: 60px;
 	height: 60px;
-	cursor: pointer;
 }
 
 .dropdown-wrapper:hover .dropdown-content {display: block;}
 
 .dropdown-wrapper:hover .dropdown {transform: scale(1.05); box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);}
 
-.dropdown-content a:hover {transform: scale(0.96);}
+.dropdown-content button:hover {transform: scale(0.96);}
 
 #title {
     text-align: center;
     color:rgb(0, 14, 90);
 	padding-left: 10px;
-	padding-rigt: 10px;
+	padding-right: 10px;
 	padding-top: 0px;
 }
 
