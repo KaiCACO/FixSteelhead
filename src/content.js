@@ -36,7 +36,9 @@ function file(name) {
     return(chrome.runtime.getURL('src/resources/' + name));
 }
 
-let colorSchemeA = ['rgb(30 45 89)', '#293b72', '#262935', "#414a72", ]
+let colorSchemeA = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59'];
+let colorSchemeB = ['#f0f0f0', "#bbc6f2", "#8f9dd9", '#9bb4ff', "#8b9ee8", "#dadaf7", "#6877b0", '#000000', '#ffffff', "#c4d3ff"];
+let userScheme = colorSchemeA;
 
 function allPages() {
     const logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
@@ -72,10 +74,10 @@ function allPages() {
     bulkedit(navDropArrows, { "color": "white" }, "elements", null);
     
     css(headerContainer, {
-        "background-color": 'rgb(30 45 89)',
+        "background-color": userScheme[9],
     });
     css(navContainer, {
-        "background-color": "#293b72",
+        "background-color": userScheme[0],
         "font-family": "raleway",
     });
     css(subNavBar, {
@@ -140,15 +142,15 @@ function assignmentCenter() {
 
     //Bulk edit some lists of elements
     bulkedit(subNavButtonNames, { "color": "black" }, "id", null);
-    bulkedit(assignmentItems, { "background-color": "#414a72" }, "elements", null);
+    bulkedit(assignmentItems, { "background-color": userScheme[2] }, "elements", null);
     //bulkedit(assignmentSortText, { "color": "white"}, "elements", null);
-    bulkedit(assignmentFilterButtons1, { "color": "white", "background-color": "#262935"}, "elements", null);
-    bulkedit(assignmentFilterButtons2, { "color": "white", "background-color": "#262935"}, "elements", null);
-    bulkedit(assignmentFilterButtons3, { "color": "white", "background-color": "#262935"}, "elements", null);
+    bulkedit(assignmentFilterButtons1, { "color": "white", "background-color": userScheme[1]}, "elements", null);
+    bulkedit(assignmentFilterButtons2, { "color": "white", "background-color": userScheme[1]}, "elements", null);
+    bulkedit(assignmentFilterButtons3, { "color": "white", "background-color": userScheme[1]}, "elements", null);
     bulkedit(viewButtons, { "border-color": "transparent" }, "elements", null);
     for (let i = 0; i < assignmentItems.length; i = (i + 2)) {
         css(assignmentItems[i], {
-            "background-color": "#414a72",
+            "background-color": userScheme[2],
             "font-family": "ralewayThin"
         })
         let assignmentText = assignmentItems[i].getElementsByTagName("td");
@@ -161,13 +163,13 @@ function assignmentCenter() {
             }
             else if(assignmentText[i].getAttribute("data-heading") == "Details") {
                 let text = assignmentText[i].getElementsByTagName("a")[0];
-                text.style["color"] = "#9bb4ff"
+                text.style["color"] = userScheme[3]
             }
         }
     }
     for (let i = 1; i < assignmentItems.length; i = (i + 2)) {
         css(assignmentItems[i], {
-            "background-color": "#3f4869"
+            "background-color": userScheme[4]
         })
         let assignmentText = assignmentItems[i].getElementsByTagName("td")
         for (let i = 0; i < assignmentText.length; i++) {
@@ -179,7 +181,7 @@ function assignmentCenter() {
             }
             else if(assignmentText[i].getAttribute("data-heading") == "Details") {
                 let text = assignmentText[i].getElementsByTagName("a")[0];
-                text.style["color"] = "#9bb4ff"
+                text.style["color"] = userScheme[3]
             }
         }
 
@@ -191,7 +193,7 @@ function assignmentCenter() {
     });
     
     css(assignmentFiltersHeader, {
-        "background-color": "#293b72",
+        "background-color": userScheme[0],
         "border-top": "none",
         "border-bottom": "none",
         "border-style": "outset",
@@ -199,7 +201,7 @@ function assignmentCenter() {
         'border-radius': '5px 5px 0px 0px',
     })
     css(assignmentFilters, {
-        "background-color": "#293b72",
+        "background-color": userScheme[0],
         "border-top": "none",
         "border-bottom": "none",
         "border-style": "outset",
@@ -207,12 +209,12 @@ function assignmentCenter() {
         "border-top-color": "transparent"
     })
     css(assignmentSort, {
-        "background-color": "#2b2b3a",
+        "background-color": userScheme[5],
         "border-top": "none",
         "border-bottom": "none"
     })
     css(assignmentsHeaderBackground, {
-        "background-color": 'rgb(30 45 89)',
+        "background-color": userScheme[9],
         'border-top': 'none',
         'border': '2px solid white',
         'border-radius': '25px 25px 0px 0px',
@@ -225,7 +227,7 @@ function assignmentCenter() {
         "font-family": "raleway"
     });
     css(assignmentsBackground, {
-        "background-color": "#323a56",
+        "background-color": userScheme[6],
         'border': '2px solid white',
         'border-radius': '0px 0px 25px 25px'
     });
@@ -264,7 +266,7 @@ function assignmentDetail() {
     bulkedit(viewPanels, { 'border-radius': '0px 0px 25px 25px' }, "elements", null);
 
     css(body, {
-        'background-color': "#2b2b3a"
+        'background-color': userScheme[5]
     })
     css (titleHeaderText, {
         "font-family": "nunito",
@@ -281,12 +283,12 @@ function assignmentDetail() {
     css (titleHeader, {
         "border": "2px solid white",
         'border-radius': '25px 25px 0px 0px',
-        "background-color": 'rgb(30 45 89)',
+        "background-color": userScheme[9],
     });
     css (statusHeader, {
         "border": "2px solid white",
         'border-radius': '25px 25px 0px 0px',
-        "background-color": 'rgb(30 45 89)',
+        "background-color": userScheme[9],
     });
     css (statusDropdown, {
         "border-radius": "10px"
