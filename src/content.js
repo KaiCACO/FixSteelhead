@@ -4,7 +4,9 @@ function css(element, style) {
         try {
             element.style[property] = style[property];
         }
-        catch(error){}
+        catch(error){
+            console.log(error);
+        }
     }
 }
 
@@ -12,22 +14,13 @@ function css(element, style) {
 function bulkedit(elements, editsList, idClassElements, removeClass) {
     for(let i = 0; i < elements.length; i++) {
         if (idClassElements == "id") {
-            try {
-                css(document.getElementById(elements[i]), editsList);
-            }
-            catch(error){}
+            css(document.getElementById(elements[i]), editsList);
         }
         else if (idClassElements == "class") {
-            try {
-                css(document.getElementsByClassName(elements[i])[0], editsList);
-            }
-            catch(error){}
+            css(document.getElementsByClassName(elements[i])[0], editsList);
         }
         else if (idClassElements == "elements") {
-            try {
-                css(elements[i], editsList);
-            }
-            catch (error){}
+            css(elements[i], editsList);
         }
         if (!(removeClass == null)) {
             try {
@@ -122,8 +115,7 @@ function assignmentCenter() {
     const dateDisplay = document.getElementById("small-date-display-label");
     const assignmentFiltersHeader = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[0];
     const assignmentFilters = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[1];
-    const assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
-    const assignmentSortText = assignmentSort.getElementsByClassName("add-existing-items-header")[0].getElementsByTagName("th");
+    //const assignmentSortText = assignmentSort.getElementsByClassName("add-existing-items-header")[0].getElementsByTagName("th");
     const assignmentsHeaderBackground = document.getElementsByClassName("bb-tile-title")[0];
     const dateTitle = document.getElementById("date-display-label");
     const assignments = document.getElementById("assignment-center");
@@ -135,6 +127,7 @@ function assignmentCenter() {
     const viewButtons = document.getElementsByClassName("btn-default");
     const assignmentsBackground = document.getElementsByClassName("bb-tile-content")[0];
     const assignmentsHeader = document.getElementsByClassName("bb-tile-header")[0];
+    const assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
 
     try {
         dateDisplay.remove();
@@ -148,7 +141,7 @@ function assignmentCenter() {
     //Bulk edit some lists of elements
     bulkedit(subNavButtonNames, { "color": "black" }, "id", null);
     bulkedit(assignmentItems, { "background-color": "#414a72" }, "elements", null);
-    bulkedit(assignmentSortText, { "color": "white"}, "elements", null);
+    //bulkedit(assignmentSortText, { "color": "white"}, "elements", null);
     bulkedit(assignmentFilterButtons1, { "color": "white", "background-color": "#262935"}, "elements", null);
     bulkedit(assignmentFilterButtons2, { "color": "white", "background-color": "#262935"}, "elements", null);
     bulkedit(assignmentFilterButtons3, { "color": "white", "background-color": "#262935"}, "elements", null);
@@ -255,7 +248,19 @@ function assignmentDetail() {
     const statusDropdown = document.getElementsByClassName("tile-body whiteContainer1")[0];
     const statusBackground = document.getElementsByClassName("assignment-detail-header completed")[0];
     const statusIndicator = document.getElementsByClassName("indicator-field p3formWhite dropdown-toggle assignment-status-button")[0];
+    const saveLater = document.getElementById("save-button");
+    const submit = document.getElementById("sub-button");
 
+    try {
+        saveLater.remove();
+    }
+    catch(e){}
+    css(submit, {
+        "transform": "translateX(-110%)",
+        "background-image": "none",
+        "background": "rgb(255,0,0)",
+        "background": "radial-gradient(circle, rgba(255,0,0,1) 0%, rgba(250,0,0,1) 100%)"
+    })
     bulkedit(viewPanels, { 'border-radius': '0px 0px 25px 25px' }, "elements", null);
 
     css(body, {
@@ -315,13 +320,10 @@ function init() {
         }
         if (i == 0) {
             if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
-                try {
-                    assignmentCenter();
-                }
-                catch(error){}
+                setTimeout(() => {assignmentCenter();}, 500);
             }
             else if (window.location.href.indexOf("assignmentdetail") > -1) {
-                assignmentDetail();
+                setTimeout(() => {assignmentDetail();}, 500);
             }
         }
         i++;
