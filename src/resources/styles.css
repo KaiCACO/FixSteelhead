@@ -16,10 +16,10 @@
 #body {
     width: 700px;
     height: 360px;
-    background-color: rgb(197, 197, 197);
+    background-color: rgb(233, 235, 243);
     border-style: outset;
     border-width: 10px;
-    border-color: gray;
+    border-color: rgb(110, 111, 126);
     font-family: 'Roboto Mono', monospace;
     font-weight: 400;
 }
@@ -79,6 +79,33 @@
 
 .dropdown-content button:hover {transform: scale(0.96);}
 
+#appearance h2 {
+    font-size: 16pt;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#appearance p {
+    font-size: 12pt;
+    text-align: center;
+    padding-top: 30px;
+}
+
+#defaults h2 {
+    font-size: 16pt;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#defaults p {
+    font-size: 12pt;
+    text-align: center;
+    padding-top: 30px;
+}
+
+
 #title {
     text-align: center;
     color:rgb(0, 14, 90);
@@ -100,7 +127,7 @@
 }
 
 #github-icon {
-    transform: translateY(35px);
+    transform: translateY(45px);
     width: 25px;
     height: 25px;
 }
