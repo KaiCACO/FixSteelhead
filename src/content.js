@@ -4,9 +4,7 @@ function css(element, style) {
         try {
             element.style[property] = style[property];
         }
-        catch(error) {
-            console.log(error);
-        }
+        catch(error){}
     }
 }
 
@@ -17,33 +15,25 @@ function bulkedit(elements, editsList, idClassElements, removeClass) {
             try {
                 css(document.getElementById(elements[i]), editsList);
             }
-            catch(error) {
-                console.log(error)
-            }
+            catch(error){}
         }
         else if (idClassElements == "class") {
             try {
                 css(document.getElementsByClassName(elements[i])[0], editsList);
             }
-            catch(error) {
-                console.log(error)
-            }
+            catch(error){}
         }
         else if (idClassElements == "elements") {
             try {
                 css(elements[i], editsList);
             }
-            catch (error) {
-                console.log(error);
-            }
+            catch (error){}
         }
         if (!(removeClass == null)) {
             try {
                 elements[i].classList.remove(removeClass);
             }
-            catch(error) {
-                console.log(error);
-            }
+            catch(error){}
         }
     }
 }
@@ -53,7 +43,7 @@ function file(name) {
     return(chrome.runtime.getURL('src/resources/' + name));
 }
 
-function assignmentCenter() {
+function assignmentCenter(i) {
     //Defines a bunch of nodes to change
     const body = document.getElementsByTagName("body")[0];
     const headerContainer = document.getElementById("site-header-container");
@@ -72,6 +62,7 @@ function assignmentCenter() {
     //These lists of nodes will all be edited at once with the bulkEdit() function
     const subNavButtonNames = ["checklist-btn", "requirement-btn", "course-requests-btn", "assignment-center-btn", "schedule-btn", "progress-btn"]
     const linkButtonNames = ["bulletin-board-link", "topics-link", "assignments-link", "roster-link"];
+    const dateDisplay = document.getElementById("small-date-display-label");
     const assignmentFiltersHeader = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[0];
     const assignmentFilters = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[1];
     const assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
@@ -92,7 +83,16 @@ function assignmentCenter() {
     headerContainer.classList.remove('pri-100-bgc');
     navContainer.classList.remove('sec-15-bgc');
 
-    uselessButtons1.remove();
+    try {
+        dateDisplay.remove();
+    }
+    catch(error){}
+    if (i==1) {
+        try {
+            uselessButtons1.remove();
+        }
+        catch(error){}
+    }
 
     //Bulk edit some lists of elements
     bulkedit(navOptions, { "color": "white" }, "elements", "pri-100-fgc");
@@ -251,20 +251,35 @@ function init() {
     document.fonts.add(raleway);
     document.fonts.add(ralewayThin);
     document.fonts.add(nunito);
-    console.log(window.location.href);
     //does a different list of actions depending on the page within steelhead
-    if (window.location.href.indexOf("assignment-center") > -1) {
-        assignmentCenter();
-    }
-    else if (window.location.href.indexOf("assignmentdetail") > -1) {
+    var i = 1;
+    let loc = window.location.href;
+    function loop() {
+        if (!(loc == window.location.href)) {
+            loc = window.location.href;
+            i = 0;
+        }
+        if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
+            try {
+                assignmentCenter(i);
+            }
+            catch(error){}
+        }
+        else if (window.location.href.indexOf("assignmentdetail") > -1) {
+            console.log("detail");
+        }
+        i++;
 
+        setTimeout(() => {loop();}, 1500);
     }
+    loop();
 
 }
 
 function waitForTarget() {
-    let el = document.getElementById("month-view");
-    if (!(el==null)) {
+    let AC = document.getElementById("month-view");
+    let AD = document.getElementById("assignment-detail-assignment");
+    if ((!(AC==null))||(!(AD==null))) {
         setTimeout(() => {init();}, 200);
     }
     else {

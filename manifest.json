@@ -6,7 +6,7 @@
     "homepage_url": "https://cascadesacademy.myschoolapp.com/app/student",
     "content_scripts": [
         {
-            "matches": ["<buttonll_urls>"],
+            "matches": ["<all_urls>"],
             "js": ["src/content.js"]
         }],
     "web_accessible_resources": [
