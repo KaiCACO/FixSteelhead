@@ -36,6 +36,8 @@ function file(name) {
     return(chrome.runtime.getURL('src/resources/' + name));
 }
 
+let colorSchemeA = ['rgb(30 45 89)', '#293b72', '#262935', "#414a72", ]
+
 function allPages() {
     const logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
     const chalkboardImage = document.getElementById("group-header-Classes").getElementsByTagName("img")[0];
@@ -124,19 +126,17 @@ function assignmentCenter() {
     const assignmentFilterButtons2 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("button");
     const assignmentFilterButtons3 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("a");
     const uselessButtons1 = document.getElementsByClassName("col-md-4")[0];
+    const uselessButton2 = document.getElementById("add-task");
+    const uselessButton3 = document.getElementById("filter-student-sections");
     const viewButtons = document.getElementsByClassName("btn-default");
     const assignmentsBackground = document.getElementsByClassName("bb-tile-content")[0];
     const assignmentsHeader = document.getElementsByClassName("bb-tile-header")[0];
     const assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
 
-    try {
-        dateDisplay.remove();
-    }
-    catch(error){}
-    try {
-        uselessButtons1.remove();
-    }
-    catch(error){}
+    dateDisplay.remove();
+    uselessButtons1.remove();
+    uselessButton2.remove();
+    uselessButton3.remove();
 
     //Bulk edit some lists of elements
     bulkedit(subNavButtonNames, { "color": "black" }, "id", null);
@@ -256,7 +256,7 @@ function assignmentDetail() {
     }
     catch(e){}
     css(submit, {
-        "transform": "translateX(-110%)",
+        "transform": "translateX(-108%)",
         "background-image": "none",
         "background": "rgb(255,0,0)",
         "background": "radial-gradient(circle, rgba(255,0,0,1) 0%, rgba(250,0,0,1) 100%)"
