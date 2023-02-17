@@ -37,7 +37,7 @@ function file(name) {
 }
 
 let colorSchemeA = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
-let colorSchemeB = ['#ffffff', "#bbc6f2", "#e4e7f0", '#282e40', "#f0f4ff", "#ffffff", "#6877b0", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
+let colorSchemeB = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#6877b0", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
 let userScheme = colorSchemeA;
 
 function allPages() {
@@ -262,7 +262,7 @@ function assignmentDetail() {
         "background": "rgb(255,0,0)",
         "background": "radial-gradient(circle, rgba(255,0,0,1) 0%, rgba(250,0,0,1) 100%)"
     })
-    bulkedit(viewPanels, { 'border-radius': '0px 0px 25px 25px' }, "elements", null);
+    bulkedit(viewPanels, { 'border-radius': '0px 0px 25px 25px', "background-color": "#eceff8" }, "elements", null);
 
     css(body, {
         'background-color': userScheme[5]
