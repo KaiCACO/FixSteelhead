@@ -26,7 +26,6 @@ function openTab(tabName) {
     for (let i = 0; i < tabs.length; i++) {
         let s = tabs[i].style;
         s.display = "none";
-
     }
     if (tabName == "home") {
         home.style.display = "block";
