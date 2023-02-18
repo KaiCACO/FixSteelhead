@@ -36,9 +36,33 @@ function file(name) {
     return(chrome.runtime.getURL('src/resources/' + name));
 }
 
-let colorSchemeA = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
-let colorSchemeB = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#6877b0", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
-let userScheme = colorSchemeA;
+let darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
+let lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#a4b7ff", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
+let userScheme = null;
+
+let schemeName = chrome.storage.sync.get('theme');
+if (schemeName == "dark") {
+    userScheme = darkTheme;
+    chrome.storage.sync.set({ "theme": "dark" });
+}
+else if (schemeName == "light") {
+    userScheme = lightTheme;
+    chrome.storage.sync.set({ "theme": "light" });
+}
+
+chrome.runtime.onMessage.addListener(
+    function(request) {
+      if (request.message == "theme") {
+        if (request.data == "dark") {
+            userScheme = darkTheme;
+            chrome.storage.sync.set({ "theme": "dark" });
+        }
+        else if (request.data == "light") {
+            userScheme = lightTheme;
+            chrome.storage.sync.set({ "theme": "light" });
+        }
+      }
+  });
 
 function allPages() {
     const logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
@@ -56,17 +80,30 @@ function allPages() {
     const subNavBar = document.getElementById("site-nav-lower");
     
     //Change some images/icons on the site to my own. These images can be found in src/resources/
-    chalkboardImage.src = file("chalkboard-icon.png");
-    groupsImage.src = file("groups-icon.png");
-    resourcesImage.src = file("books-icon.png");
-    newsImage.src = file("newspaper-icon.png");
-    calendarImage.src = file("calendar-icon.png");
-    directoryImage.src = file("directory-icon.png");
+    if (userScheme == darkTheme) {
+        chalkboardImage.src = file("chalkboard-icon.png");
+        groupsImage.src = file("groups-icon.png");
+        resourcesImage.src = file("books-icon.png");
+        newsImage.src = file("newspaper-icon.png");
+        calendarImage.src = file("calendar-icon.png");
+        directoryImage.src = file("directory-icon.png");
+    }
+    else if (userScheme == lightTheme) {
+        chalkboardImage.src = file("chalkboard-icon-black.png");
+        groupsImage.src = file("groups-icon-black.png");
+        resourcesImage.src = file("books-icon-black.png");
+        newsImage.src = file("newspaper-icon-black.png");
+        calendarImage.src = file("calendar-icon-black.png");
+        directoryImage.src = file("directory-icon-black.png");
+    }
     logoImage.src = file("kaiscades-academy.png");
 
     //The original code is awful. Idk why I need to do this but I do
-    headerContainer.classList.remove('pri-100-bgc');
-    navContainer.classList.remove('sec-15-bgc');
+    try {
+        headerContainer.classList.remove('pri-100-bgc');
+        navContainer.classList.remove('sec-15-bgc');
+    }
+    catch(e){}
 
     //Some bulk edits
     bulkedit(navOptions, { "color": userScheme[7] }, "elements", "pri-100-fgc");
@@ -134,10 +171,13 @@ function assignmentCenter() {
     const assignmentsHeader = document.getElementsByClassName("bb-tile-header")[0];
     const assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
 
-    dateDisplay.remove();
-    uselessButtons1.remove();
-    uselessButton2.remove();
-    uselessButton3.remove();
+    try {
+        dateDisplay.remove();
+        uselessButtons1.remove();
+        uselessButton2.remove();
+        uselessButton3.remove();
+    }
+    catch(e){}
 
     //Bulk edit some lists of elements
     bulkedit(subNavButtonNames, { "color": "black" }, "id", null);
@@ -311,29 +351,19 @@ function init() {
     document.fonts.add(ralewayThin);
     document.fonts.add(nunito);
     //does a different list of actions depending on the page within steelhead
-    var i = 0;
     let loc = window.location.href;
     function loop() {
         allPages();
         if (!(loc == window.location.href)) {
             loc = window.location.href;
-            i = 0;
         }
-        if (i == 0) {
-            if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
-                setTimeout(() => {assignmentCenter();}, 500);
-            }
-            else if (window.location.href.indexOf("assignmentdetail") > -1) {
-                setTimeout(() => {assignmentDetail();}, 500);
-            }
+        if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
+            setTimeout(() => {assignmentCenter();}, 500);
         }
-        i++;
-        if (i<3) {
-            setTimeout(() => {loop();}, 300);
+        else if (window.location.href.indexOf("assignmentdetail") > -1) {
+            setTimeout(() => {assignmentDetail();}, 500);
         }
-        else {
-            setTimeout(() => {loop();}, 800);
-        }
+        setTimeout(() => {loop();}, 800);
     }
     loop();
 

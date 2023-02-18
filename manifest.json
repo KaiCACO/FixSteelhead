@@ -4,6 +4,10 @@
     "version": "2.0.1",
     "author": "Kai Sereni",
     "homepage_url": "https://cascadesacademy.myschoolapp.com/app/student",
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
