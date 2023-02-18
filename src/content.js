@@ -40,29 +40,19 @@ let darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a
 let lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#a4b7ff", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
 let userScheme = null;
 
-let schemeName = chrome.storage.sync.get('theme');
-if (schemeName == "dark") {
-    userScheme = darkTheme;
-    chrome.storage.sync.set({ "theme": "dark" });
-}
-else if (schemeName == "light") {
-    userScheme = lightTheme;
-    chrome.storage.sync.set({ "theme": "light" });
-}
-
 chrome.runtime.onMessage.addListener(
-    function(request) {
-      if (request.message == "theme") {
-        if (request.data == "dark") {
-            userScheme = darkTheme;
-            chrome.storage.sync.set({ "theme": "dark" });
+        function(request) {
+        if (request.message == "theme") {
+            if (request.data == "dark") {
+                userScheme = darkTheme;
+                chrome.storage.sync.set({ "theme": "dark" });
+            }
+            else if (request.data == "light") {
+                userScheme = lightTheme;
+                chrome.storage.sync.set({ "theme": "light" });
+            }
         }
-        else if (request.data == "light") {
-            userScheme = lightTheme;
-            chrome.storage.sync.set({ "theme": "light" });
-        }
-      }
-  });
+    });
 
 function allPages() {
     const logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
@@ -370,14 +360,36 @@ function init() {
 }
 
 function waitForTarget() {
-    let AC = document.getElementById("month-view");
-    let AD = document.getElementById("assignment-detail-assignment");
-    if ((!(AC==null))||(!(AD==null))) {
-        setTimeout(() => {init();}, 200);
+
+    let schemeName = "dark";
+    chrome.storage.sync.get(["theme"]).then((result) => {
+        schemeName = result.theme;
+    });
+    
+    if (schemeName == "dark") {
+        userScheme = darkTheme;
+        chrome.storage.sync.set({ "theme": "dark" });
+    }
+    else if (schemeName == "light") {
+        userScheme = lightTheme;
+        chrome.storage.sync.set({ "theme": "light" });
     }
     else {
-        setTimeout(() => {waitForTarget();}, 200);
+        userScheme = darkTheme;
+        chrome.storage.sync.set({ "theme": "dark" });
     }
+
+    function loop() {
+        let AC = document.getElementById("month-view");
+        let AD = document.getElementById("assignment-detail-assignment");
+        if ((!(AC==null))||(!(AD==null))) {
+            setTimeout(() => {init();}, 200);
+        }
+        else {
+            setTimeout(() => {loop();}, 200);
+        }
+    }
+    loop();
 
 };
 

@@ -17,14 +17,6 @@ function messageCJS(message, data) {
 homeButton.addEventListener("click", function() {openTab("home")});
 appearanceButton.addEventListener("click", function() {openTab("appearance")});
 defaultsButton.addEventListener("click", function() {openTab("defaults")});
-themeSwitch.addEventListener('change', function() {
-    if (themeSwitch.checked) {
-        messageCJS("theme", "light");
-    }
-    else {
-        messageCJS("theme", "dark");
-    }
-  })
 
 openTab("home");
 
@@ -44,7 +36,21 @@ function openTab(tabName) {
     }
     else if (tabName == "appearance") {
         appearance.style.display = "block";
-        themeSwitch.checked=chrome.storage.sync.get('theme');
+        if (chrome.storage.sync.get(['theme'].theme) == "dark") {
+            themeSwitch.checked = false;
+        }
+        else if (chrome.storage.sync.get(['theme'].theme) == "light") {
+            themeSwitch.checked = true;
+        }
     }
+    
+    themeSwitch.addEventListener('change', function() {
+        if (themeSwitch.checked) {
+            messageCJS("theme", "light");
+        }
+        else {
+            messageCJS("theme", "dark");
+        }
+      })
 
 }
