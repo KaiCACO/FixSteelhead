@@ -300,13 +300,13 @@ function assignmentDetail() {
     css (titleHeaderText, {
         "font-family": "nunito",
         "color": userScheme[7],
-        "text-shadow": "0px 0px 10px black",
+        "text-shadow": "0px 0px 10px " + userScheme[8],
         'transform': 'translate(60%, 2px)'
     });
     css (statusText, {
         "font-family": "nunito",
         "color": userScheme[7],
-        "text-shadow": "0px 0px 10px black",
+        "text-shadow": "0px 0px 10px " + userScheme[8],
         'transform': 'translateY(3px)'
     });
     css (titleHeader, {
