@@ -86,7 +86,8 @@ function allPages() {
         calendarImage.src = file("calendar-icon-black.png");
         directoryImage.src = file("directory-icon-black.png");
     }
-    logoImage.src = file("kaiscades-academy.png");
+    
+    //logoImage.src = file("kaiscades-academy.png");
 
     //The original code is awful. Idk why I need to do this but I do
     try {
