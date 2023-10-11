@@ -20,7 +20,7 @@ defaultsButton.addEventListener("click", function() {openTab("defaults")});
 
 openTab("home");
 
-function openTab(tabName) {
+async function openTab(tabName) {
     var tabs = document.getElementsByClassName("tab");
 
     for (let i = 0; i < tabs.length; i++) {
@@ -35,10 +35,11 @@ function openTab(tabName) {
     }
     else if (tabName == "appearance") {
         appearance.style.display = "block";
-        if (chrome.storage.sync.get(['theme'].theme) == "dark") {
+        themeObject = await chrome.storage.sync.get(["theme"]);
+        if (themeObject.theme == "dark") {
             themeSwitch.checked = false;
         }
-        else if (chrome.storage.sync.get(['theme'].theme) == "light") {
+        else if (themeObject.theme == "light") {
             themeSwitch.checked = true;
         }
     }

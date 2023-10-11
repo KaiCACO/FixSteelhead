@@ -149,6 +149,7 @@ function assignmentCenter() {
     const assignmentsHeaderBackground = document.getElementsByClassName("bb-tile-title")[0];
     const dateTitle = document.getElementById("date-display-label");
     const assignments = document.getElementById("assignment-center");
+    const assignmentSortTH = document.getElementsByTagName("th")
     const assignmentItems = document.getElementById("assignment-center-assignment-items").getElementsByTagName("tr");
     const assignmentFilterButtons1 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("label");
     const assignmentFilterButtons2 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("button");
@@ -169,10 +170,15 @@ function assignmentCenter() {
     }
     catch(e){}
 
+    let assignmentSortText = [];
+    for (let i = 0; i < assignmentSortTH.length; i++) {
+        assignmentSortText.push(assignmentSortTH[i]);
+    }
+
     //Bulk edit some lists of elements
     bulkedit(subNavButtonNames, { "color": "black" }, "id", null);
     bulkedit(assignmentItems, { "background-color": userScheme[2] }, "elements", null);
-    //bulkedit(assignmentSortText, { "color": userScheme[7]}, "elements", null);
+    bulkedit(assignmentSortText, { "color": userScheme[7]}, "elements", null);
     bulkedit(assignmentFilterButtons1, { "color": userScheme[7], "background-color": userScheme[1]}, "elements", null);
     bulkedit(assignmentFilterButtons2, { "color": userScheme[7], "background-color": userScheme[1]}, "elements", null);
     bulkedit(assignmentFilterButtons3, { "color": userScheme[7], "background-color": userScheme[1]}, "elements", null);
@@ -347,7 +353,11 @@ function init() {
         if (!(loc == window.location.href)) {
             loc = window.location.href;
         }
-        if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
+        if (window.location.href.indexOf("app/student#guidedtour") > -1) {
+            window.location.replace("https://cascadesacademy.myschoolapp.com/app/student#studentmyday/assignment-center");
+            setTimeout(() => {assignmentCenter();}, 500);
+        }
+        else if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
             setTimeout(() => {assignmentCenter();}, 500);
         }
         else if (window.location.href.indexOf("assignmentdetail") > -1) {
@@ -359,10 +369,10 @@ function init() {
 
 }
 
-function waitForTarget() {
+async function waitForTarget() {
 
-    let schemeName = "dark";
-    chrome.storage.sync.get(["theme"]).then((result) => {
+    let schemeName = null;
+    await chrome.storage.sync.get(["theme"]).then((result) => {
         schemeName = result.theme;
     });
     
