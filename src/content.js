@@ -264,7 +264,8 @@ function assignmentCenter() {
     css(assignmentsBackground, {
         "background-color": userScheme[6],
         'border': '2px solid ' + userScheme[7],
-        'border-radius': '0px 0px 25px 25px'
+        'border-radius': '0px 0px 25px 25px',
+        'color': userScheme[7]
     });
     css(assignmentsHeader, {
         "font-family": "nunito",
