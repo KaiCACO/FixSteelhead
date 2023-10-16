@@ -33,7 +33,11 @@ function bulkedit(elements, editsList, idClassElements, removeClass) {
 
 //Gets the temporary URL of a file in the extension
 function file(name) {
-    return(chrome.runtime.getURL('src/resources/' + name));
+    try {
+        return(chrome.runtime.getURL('src/resources/' + name));
+    }
+    catch (e) {}
+    
 }
 
 let darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
