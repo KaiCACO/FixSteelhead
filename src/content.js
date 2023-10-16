@@ -33,7 +33,10 @@ function bulkedit(elements, editsList, idClassElements, removeClass) {
 
 //Gets the temporary URL of a file in the extension
 function file(name) {
-    return(chrome.runtime.getURL('src/resources/' + name));
+    try {
+        return(chrome.runtime.getURL('src/resources/' + name));
+    }
+    catch(e){}
 }
 
 let darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
@@ -338,6 +341,12 @@ function assignmentDetail() {
     })
 }
 
+function progressPage() {
+    console.log("pp");
+    const gradeText = document.getElementsByClassName("showGrade");
+    bulkedit(gradeText, {"visibility": "unset", "text-align": "center"}, "class", null);
+}
+
 //Init is called when the window loads.
 function init() {
     //adds some new fonts to the page's font library
@@ -349,7 +358,7 @@ function init() {
     document.fonts.add(nunito);
     //does a different list of actions depending on the page within steelhead
     let loc = window.location.href;
-    function loop() {
+    function loopI() {
         allPages();
         if (!(loc == window.location.href)) {
             loc = window.location.href;
@@ -364,9 +373,12 @@ function init() {
         else if (window.location.href.indexOf("assignmentdetail") > -1) {
             setTimeout(() => {assignmentDetail();}, 500);
         }
-        setTimeout(() => {loop();}, 800);
+        else if (window.location.href.indexOf("studentmyday/progress") > -1) {
+            setTimeout(() => {progressPage();}, 500);
+        }
+        setTimeout(() => {loopI();}, 800);
     }
-    loop();
+    loopI();
 
 }
 
@@ -390,17 +402,17 @@ async function waitForTarget() {
         chrome.storage.sync.set({ "theme": "dark" });
     }
 
-    function loop() {
+    function loopT() {
         let AC = document.getElementById("month-view");
         let AD = document.getElementById("assignment-detail-assignment");
         if ((!(AC==null))||(!(AD==null))) {
             setTimeout(() => {init();}, 200);
         }
         else {
-            setTimeout(() => {loop();}, 200);
+            setTimeout(() => {loopT();}, 200);
         }
     }
-    loop();
+    loopT();
 
 };
 
