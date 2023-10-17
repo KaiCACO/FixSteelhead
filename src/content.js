@@ -341,15 +341,25 @@ async function progressPage() {
     let gradeText = document.getElementsByClassName("showGrade");
     let sectionsHeader = document.getElementsByClassName("bb-tile-title");
     let sectionsContent = document.getElementsByClassName("bb-tile-content");
+    let tileHeaders = document.getElementsByClassName("bb-tile-header");
 
     bulkedit(gradeText, {"visibility": "unset", "text-align": "left"}, "elements", null);
     bulkedit(sectionsHeader, {
-        "border-top-left-radius": "20px",
-        "border-top-right-radius": "20px"
+        "border-width": "2px",
+        "border-style": "solid",
+        "border-color": userScheme[7],
+        "border-top-left-radius": "10px",
+        "border-top-right-radius": "10px",
+        "background-color": userScheme[9]
     }, "elements", null);
     bulkedit(sectionsContent, {
         "border-bottom-left-radius": "20px",
         "border-bottom-right-radius": "20px"
+    }, "elements", null);
+    bulkedit(tileHeaders, {
+        "color": userScheme[7],
+        "font-family": "raleway",
+        "font-size": "15pt"
     }, "elements", null);
 }
 
