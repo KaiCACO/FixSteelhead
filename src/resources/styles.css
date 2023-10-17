@@ -183,12 +183,8 @@
     transform: translateX(26px);
   }
 
-  #theme-switch {
-    transform: translateY(10px);
-    text-align: center;
-  }
-
-  #theme-switch h3 {
-    transform: translateY(-10px);
-    text-align: center;
+  .switch-container {
+    position:relative;
+    display: inline-block;
+    padding: 10px;
   }
