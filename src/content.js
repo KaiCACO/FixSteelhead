@@ -39,8 +39,8 @@ function file(name) {
     catch(e){}
 }
 
-let darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
-let lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#a4b7ff", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
+const darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
+const lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#a4b7ff", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
 let userScheme = null;
 
 chrome.runtime.onMessage.addListener(
@@ -234,17 +234,20 @@ async function assignmentCenter() {
         "background-color": userScheme[0],
         "border-top": "none",
         "border-bottom": "none",
-        "border-style": "outset",
+        "border-style": "solid",
         "border-color": userScheme[7],
-        'border-radius': '5px 5px 0px 0px',
+        'border-radius': '10px 10px 0px 0px',
+        "border-width": "1px"
     })
     css(assignmentFilters, {
         "background-color": userScheme[0],
-        "border-top": "none",
-        "border-bottom": "none",
-        "border-style": "outset",
+        "border-top-width": "0px",
+        "border-left-width": "1px",
+        "border-right-width": "1px",
+        "border-bottom-width": "1px",
+        "border-style": "solid",
         "border-color": userScheme[7],
-        "border-top-color": "transparent"
+        'border-radius': '0px 0px 10px 10px'
     })
     css(assignmentSort, {
         "background-color": userScheme[5],
@@ -253,8 +256,10 @@ async function assignmentCenter() {
     })
     css(assignmentsHeaderBackground, {
         "background-color": userScheme[9],
-        'border-top': 'none',
-        'border': '2px solid ' + userScheme[7],
+        'border-top': '2px solid ' + userScheme[7],
+        'border-left': '2px solid ' + userScheme[7],
+        'border-right': '2px solid ' + userScheme[7],
+        'border-bottom': 'none',
         'border-radius': '25px 25px 0px 0px',
     });
     css(dateTitle, {
@@ -338,11 +343,17 @@ async function assignmentDetail() {
 }
 
 async function progressPage() {
+    let selectGradeContainer = document.getElementsByClassName("well well-sm")[0];
     let gradeText = document.getElementsByClassName("showGrade");
     let sectionsHeader = document.getElementsByClassName("bb-tile-title");
     let sectionsContent = document.getElementsByClassName("bb-tile-content");
     let tileHeaders = document.getElementsByClassName("bb-tile-header");
+    let gradeDropdown = document.getElementById("gradeSelect");
 
+    try {
+        selectGradeContainer.getElementsByTagName("label")[0].remove();
+    }
+    catch(e){}
     bulkedit(gradeText, {"visibility": "unset", "text-align": "left"}, "elements", null);
     bulkedit(sectionsHeader, {
         "border-width": "2px",
@@ -354,17 +365,32 @@ async function progressPage() {
     }, "elements", null);
     bulkedit(sectionsContent, {
         "border-bottom-left-radius": "20px",
-        "border-bottom-right-radius": "20px"
+        "border-bottom-right-radius": "20px",
+        "border-color": userScheme[7],
+        "border-style": "solid",
+        "border-top-width": "0px",
+        "border-left-width": "2px",
+        "border-right-width": "2px",
+        "border-bottom-width": "2px",
     }, "elements", null);
     bulkedit(tileHeaders, {
         "color": userScheme[7],
         "font-family": "raleway",
         "font-size": "15pt"
     }, "elements", null);
+    css(selectGradeContainer, {
+        "background-color": "rgba(1, 1, 1, 0)",
+        "border-style": "hidden"
+    })
+    css(gradeDropdown, {
+        "background-color": userScheme[9],
+        "color": userScheme[7]
+    })
 }
 
 //Init is called when the window loads.
 async function init() {
+    
     //get user theme
     let schemeName = null;
     await chrome.storage.sync.get(["theme"]).then((result) => {
