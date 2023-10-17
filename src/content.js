@@ -44,7 +44,7 @@ let lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#fffff
 let userScheme = null;
 
 chrome.runtime.onMessage.addListener(
-        function(request) {
+        async function(request) {
         if (request.message == "theme") {
             if (request.data == "dark") {
                 userScheme = darkTheme;
@@ -57,20 +57,21 @@ chrome.runtime.onMessage.addListener(
         }
     });
 
-function allPages() {
-    const logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
-    const chalkboardImage = document.getElementById("group-header-Classes").getElementsByTagName("img")[0];
-    const groupsImage = document.getElementById("group-header-Groups").getElementsByTagName("img")[0];
-    const resourcesImage = document.getElementById("group-header-Resources").getElementsByTagName("img")[0];
-    const newsImage = document.getElementById("group-header-News").getElementsByTagName("img")[0];
-    const calendarImage = document.getElementById("calendar-subnav").getElementsByTagName("img")[0];
-    const directoryImage = document.getElementById("directory-subnav").getElementsByTagName("img")[0];
-    const headerContainer = document.getElementById("site-header-container");
-    const navContainer = document.getElementById("site-nav-container");
-    const navOptions = navContainer.getElementsByClassName("title sky-nav");
-    const navSubs = navContainer.getElementsByClassName("desc");
-    const navDropArrows = navContainer.getElementsByClassName("caret");
-    const subNavBar = document.getElementById("site-nav-lower");
+async function allPages() {
+    let body = document.getElementsByTagName("body")[0];
+    let logoImage = document.getElementById("site-logo").getElementsByTagName("img")[0];
+    let chalkboardImage = document.getElementById("group-header-Classes").getElementsByTagName("img")[0];
+    let groupsImage = document.getElementById("group-header-Groups").getElementsByTagName("img")[0];
+    let resourcesImage = document.getElementById("group-header-Resources").getElementsByTagName("img")[0];
+    let newsImage = document.getElementById("group-header-News").getElementsByTagName("img")[0];
+    let calendarImage = document.getElementById("calendar-subnav").getElementsByTagName("img")[0];
+    let directoryImage = document.getElementById("directory-subnav").getElementsByTagName("img")[0];
+    let headerContainer = document.getElementById("site-header-container");
+    let navContainer = document.getElementById("site-nav-container");
+    let navOptions = navContainer.getElementsByClassName("title sky-nav");
+    let navSubs = navContainer.getElementsByClassName("desc");
+    let navDropArrows = navContainer.getElementsByClassName("caret");
+    let subNavBar = document.getElementById("site-nav-lower");
     
     //Change some images/icons on the site to my own. These images can be found in src/resources/
     if (userScheme == darkTheme) {
@@ -103,6 +104,9 @@ function allPages() {
     bulkedit(navSubs, { "color": userScheme[7] }, "elements", "black-fgc");
     bulkedit(navDropArrows, { "color": userScheme[7] }, "elements", null);
     
+    css(body, {
+        "background-color": userScheme[5]
+    });
     css(headerContainer, {
         "background-color": userScheme[10],
     });
@@ -141,29 +145,28 @@ function allPages() {
     
 }
 
-function assignmentCenter() {
+async function assignmentCenter() {
     //Defines a bunch of nodes to change
-    const body = document.getElementsByTagName("body")[0];
     //These lists of nodes will all be edited at once with the bulkEdit() function
-    const subNavButtonNames = ["checklist-btn", "requirement-btn", "course-requests-btn", "assignment-center-btn", "schedule-btn", "progress-btn"]
-    const dateDisplay = document.getElementById("small-date-display-label");
-    const assignmentFiltersHeader = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[0];
-    const assignmentFilters = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[1];
-    const assignmentsHeaderBackground = document.getElementsByClassName("bb-tile-title")[0];
-    const dateTitle = document.getElementById("date-display-label");
-    const assignments = document.getElementById("assignment-center");
-    const assignmentSortTH = document.getElementsByTagName("th")
-    const assignmentItems = document.getElementById("assignment-center-assignment-items").getElementsByTagName("tr");
-    const assignmentFilterButtons1 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("label");
-    const assignmentFilterButtons2 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("button");
-    const assignmentFilterButtons3 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("a");
-    const uselessButtons1 = document.getElementsByClassName("col-md-4")[0];
-    const uselessButton2 = document.getElementById("add-task");
-    const uselessButton3 = document.getElementById("filter-student-sections");
-    const viewButtons = document.getElementsByClassName("btn-default");
-    const assignmentsBackground = document.getElementsByClassName("bb-tile-content")[0];
-    const assignmentsHeader = document.getElementsByClassName("bb-tile-header")[0];
-    const assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
+    let subNavButtonNames = ["checklist-btn", "requirement-btn", "course-requests-btn", "assignment-center-btn", "schedule-btn", "progress-btn"]
+    let dateDisplay = document.getElementById("small-date-display-label");
+    let assignmentFiltersHeader = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[0];
+    let assignmentFilters = document.getElementsByClassName("bb-action-bar hidden-xs hidden-sm")[1];
+    let assignmentsHeaderBackground = document.getElementsByClassName("bb-tile-title")[0];
+    let dateTitle = document.getElementById("date-display-label");
+    let assignments = document.getElementById("assignment-center");
+    let assignmentSortTH = document.getElementsByTagName("th")
+    let assignmentItems = document.getElementById("assignment-center-assignment-items").getElementsByTagName("tr");
+    let assignmentFilterButtons1 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("label");
+    let assignmentFilterButtons2 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("button");
+    let assignmentFilterButtons3 = document.getElementsByClassName("assignment-calendar-header")[0].getElementsByTagName("a");
+    let uselessButtons1 = document.getElementsByClassName("col-md-4")[0];
+    let uselessButton2 = document.getElementById("add-task");
+    let uselessButton3 = document.getElementById("filter-student-sections");
+    let viewButtons = document.getElementsByClassName("btn-default");
+    let assignmentsBackground = document.getElementsByClassName("bb-tile-content")[0];
+    let assignmentsHeader = document.getElementsByClassName("bb-tile-header")[0];
+    let assignmentSort = document.getElementsByClassName("table table-sky table-striped table-mobile-stacked")[0].getElementsByTagName("thead")[0];
 
     try {
         dateDisplay.remove();
@@ -226,9 +229,6 @@ function assignmentCenter() {
     }
 
     //Edit the css of a bunch of elements using the css() function
-    css(body, {
-        "background-color": userScheme[5]
-    });
     
     css(assignmentFiltersHeader, {
         "background-color": userScheme[0],
@@ -279,18 +279,17 @@ function assignmentCenter() {
 
 }
 
-function assignmentDetail() {
-    const body = document.getElementsByTagName("body")[0];
-    const titleHeaderText = document.getElementsByClassName("bb-tile-header")[0];
-    const statusText = document.getElementsByClassName("bb-tile-header")[1];
-    const titleHeader = document.getElementsByClassName("bb-tile-title")[0];
-    const statusHeader = document.getElementsByClassName("bb-tile-title")[1];
-    const viewPanels = document.getElementsByClassName("bb-tile-content");
-    const statusDropdown = document.getElementsByClassName("tile-body whiteContainer1")[0];
-    const statusBackground = document.getElementsByClassName("assignment-detail-header completed")[0];
-    const statusIndicator = document.getElementsByClassName("indicator-field p3formWhite dropdown-toggle assignment-status-button")[0];
-    const saveLater = document.getElementById("save-button");
-    const submit = document.getElementById("sub-button");
+async function assignmentDetail() {
+    let titleHeaderText = document.getElementsByClassName("bb-tile-header")[0];
+    let statusText = document.getElementsByClassName("bb-tile-header")[1];
+    let titleHeader = document.getElementsByClassName("bb-tile-title")[0];
+    let statusHeader = document.getElementsByClassName("bb-tile-title")[1];
+    let viewPanels = document.getElementsByClassName("bb-tile-content");
+    let statusDropdown = document.getElementsByClassName("tile-body whiteContainer1")[0];
+    let statusBackground = document.getElementsByClassName("assignment-detail-header completed")[0];
+    let statusIndicator = document.getElementsByClassName("indicator-field p3formWhite dropdown-toggle assignment-status-button")[0];
+    let saveLater = document.getElementById("save-button");
+    let submit = document.getElementById("sub-button");
 
     try {
         saveLater.remove();
@@ -304,9 +303,6 @@ function assignmentDetail() {
     })
     bulkedit(viewPanels, { 'border-radius': '0px 0px 25px 25px', "background-color": "#eceff8" }, "elements", null);
 
-    css(body, {
-        'background-color': userScheme[5]
-    })
     css (titleHeaderText, {
         "font-family": "nunito",
         "color": userScheme[7],
@@ -341,49 +337,25 @@ function assignmentDetail() {
     })
 }
 
-function progressPage() {
-    console.log("pp");
-    const gradeText = document.getElementsByClassName("showGrade");
-    bulkedit(gradeText, {"visibility": "unset", "text-align": "center"}, "class", null);
+async function progressPage() {
+    let gradeText = document.getElementsByClassName("showGrade");
+    let sectionsHeader = document.getElementsByClassName("bb-tile-title");
+    let sectionsContent = document.getElementsByClassName("bb-tile-content");
+
+    bulkedit(gradeText, {"visibility": "unset", "text-align": "left"}, "elements", null);
+    bulkedit(sectionsHeader, {
+        "border-top-left-radius": "20px",
+        "border-top-right-radius": "20px"
+    }, "elements", null);
+    bulkedit(sectionsContent, {
+        "border-bottom-left-radius": "20px",
+        "border-bottom-right-radius": "20px"
+    }, "elements", null);
 }
 
 //Init is called when the window loads.
-function init() {
-    //adds some new fonts to the page's font library
-    const raleway = new FontFace("raleway", "url(" + file('Raleway.ttf') + ")");
-    const ralewayThin = new FontFace("ralewayThin", "url(" + file('RalewayThin.ttf') + ")");
-    const nunito = new FontFace("nunito", "url(" + file('Nunito.ttf') + ")");
-    document.fonts.add(raleway);
-    document.fonts.add(ralewayThin);
-    document.fonts.add(nunito);
-    //does a different list of actions depending on the page within steelhead
-    let loc = window.location.href;
-    function loopI() {
-        allPages();
-        if (!(loc == window.location.href)) {
-            loc = window.location.href;
-        }
-        if (window.location.href.indexOf("app/student#guidedtour") > -1) {
-            window.location.replace("https://cascadesacademy.myschoolapp.com/app/student#studentmyday/assignment-center");
-            setTimeout(() => {assignmentCenter();}, 500);
-        }
-        else if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
-            setTimeout(() => {assignmentCenter();}, 500);
-        }
-        else if (window.location.href.indexOf("assignmentdetail") > -1) {
-            setTimeout(() => {assignmentDetail();}, 500);
-        }
-        else if (window.location.href.indexOf("studentmyday/progress") > -1) {
-            setTimeout(() => {progressPage();}, 500);
-        }
-        setTimeout(() => {loopI();}, 800);
-    }
-    loopI();
-
-}
-
-async function waitForTarget() {
-
+async function init() {
+    //get user theme
     let schemeName = null;
     await chrome.storage.sync.get(["theme"]).then((result) => {
         schemeName = result.theme;
@@ -402,18 +374,40 @@ async function waitForTarget() {
         chrome.storage.sync.set({ "theme": "dark" });
     }
 
-    function loopT() {
-        let AC = document.getElementById("month-view");
-        let AD = document.getElementById("assignment-detail-assignment");
-        if ((!(AC==null))||(!(AD==null))) {
-            setTimeout(() => {init();}, 200);
+    //adds some new fonts to the page's font library
+    const raleway = new FontFace("raleway", "url(" + file('Raleway.ttf') + ")");
+    const ralewayThin = new FontFace("ralewayThin", "url(" + file('RalewayThin.ttf') + ")");
+    const nunito = new FontFace("nunito", "url(" + file('Nunito.ttf') + ")");
+    document.fonts.add(raleway);
+    document.fonts.add(ralewayThin);
+    document.fonts.add(nunito);
+    //does a different list of actions depending on the page within steelhead
+    let loc = window.location.href;
+    async function loop() {
+        try {
+            allPages();
+            if (!(loc == window.location.href)) {
+                loc = window.location.href;
+            }
+            if (window.location.href.indexOf("app/student#guidedtour") > -1) {
+                window.location.replace("https://cascadesacademy.myschoolapp.com/app/student#studentmyday/assignment-center");
+                setTimeout(() => {assignmentCenter();}, 500);
+            }
+            else if (window.location.href.indexOf("studentmyday/assignment-center") > -1) {
+                setTimeout(() => {assignmentCenter();}, 500);
+            }
+            else if (window.location.href.indexOf("assignmentdetail") > -1) {
+                setTimeout(() => {assignmentDetail();}, 500);
+            }
+            else if (window.location.href.indexOf("studentmyday/progress") > -1) {
+                setTimeout(() => {progressPage();}, 500);
+            }
+            setTimeout(() => {loop();}, 800);
         }
-        else {
-            setTimeout(() => {loopT();}, 200);
-        }
+        catch(e){console.log(e);}
     }
-    loopT();
+    loop();
 
-};
+}
 
-waitForTarget();
+init();
