@@ -388,6 +388,27 @@ async function progressPage() {
     })
 }
 
+function classPage() {
+    let titleHeader = document.getElementsByClassName("section-heading");
+    let textHeader = document.getElementsByClassName("bb-page-heading")[0];
+    let tabsContainer = document.getElementsByClassName("nav nav-tabs")[1];
+
+    bulkedit(titleHeader, {
+        "background-color": userScheme[0],
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": userScheme[7]
+    }, "elements", null);
+    css(textHeader, {
+        "color": userScheme[7],
+        "font-family": 'raleway',
+        'font-size': '17pt'
+    })
+    // css(tabsContainer, {
+    //     'background-color': "black"
+    // })
+}
+
 //Init is called when the window loads.
 async function init() {
     
@@ -437,6 +458,9 @@ async function init() {
             }
             else if (window.location.href.indexOf("studentmyday/progress") > -1) {
                 setTimeout(() => {progressPage();}, 500);
+            }
+            else if (window.location.href.indexOf("academicclass") > -1) {
+                setTimeout(() => {classPage();}, 500);
             }
             setTimeout(() => {loop();}, 800);
         }
