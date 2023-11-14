@@ -390,23 +390,88 @@ async function progressPage() {
 
 function classPage() {
     let titleHeader = document.getElementsByClassName("section-heading");
+    let tileTitle = document.getElementsByClassName("bb-tile-title");
+    let contentSection = document.getElementsByClassName("bb-tile-content-section");
     let textHeader = document.getElementsByClassName("bb-page-heading")[0];
-    let tabsContainer = document.getElementsByClassName("nav nav-tabs")[1];
+    let tileSectionHeader = document.getElementsByClassName("bb-tile-header");
+    let statusFilterItem = document.getElementsByClassName("status-filter-item");
+    let bulletinTile = document.getElementsByClassName("thumbnail bulletin");
+    let leadText = document.getElementsByClassName("lead");
+    let spanText = document.getElementsByTagName("span");
+    let tagTileTitles = document.getElementsByTagName("h2");
+    let topicTiles = document.getElementsByClassName("col-md-3");
+    let topicTileKids = [];
+    var filterButtons = [];
 
+    for (const i in statusFilterItem) {
+        try {
+            filterButtons.push(statusFilterItem[i].querySelector('a').querySelector('h5').querySelector('div').querySelector('div'));
+        }
+        catch(e){}
+        try {
+            filterButtons.push(statusFilterItem[i].querySelector('a').querySelector('div').querySelector('div'));
+        }catch(e){}
+    }
+    for (const i in topicTiles) {
+        try {
+            console.log(topicTiles[i].children[0]);
+            topicTiles[i].children[0].style["background-color"] = userScheme[1];
+            topicTiles[i].children[0].style["border"] = "2px solid " + userScheme[7];
+            topicTiles[i].children[0].style["border-radius"] = "10px";
+        }
+        catch(e){}
+    }
+    for (const i in spanText) {
+        try {
+            if(spanText[i].textContent.length > 1 && spanText[i].textContent * 0 != 0) {
+                css(spanText[i], {
+                    "color": userScheme[7]
+                })
+            }
+        }
+        catch(e){}
+    }
+
+    bulkedit(bulletinTile, {
+        "background-color": userScheme[0]
+    }, "elements", null);
+    bulkedit(leadText, {
+        "color": userScheme[7]
+    }, "elements", null);
+    bulkedit(tagTileTitles, {
+        "font-family": "raleway",
+        "color": userScheme[7]
+    }, "elements", null);
+    bulkedit(filterButtons, {
+        "line-height": "5px"
+    }, "elements", null);
+    bulkedit(contentSection, {
+        "border": "2px solid " + userScheme[4],
+        "border-bottom-left-radius": "15px",
+        "border-bottom-right-radius": "15px"
+    }, "elements", null);
+    bulkedit(tileTitle, {
+        "border": "2px solid " + userScheme[7],
+        "border-top-left-radius": "15px",
+        "border-top-right-radius": "15px",
+        "background-color": userScheme[0]
+    }, "elements", null);
     bulkedit(titleHeader, {
         "background-color": userScheme[0],
         "border-style": "solid",
         "border-width": "1px",
-        "border-color": userScheme[7]
+        "border-color": userScheme[7],
+        "border-radius": "15px"
+    }, "elements", null);
+    bulkedit(tileSectionHeader, {
+        "color": userScheme[7],
+        "font-family": "raleway"
     }, "elements", null);
     css(textHeader, {
         "color": userScheme[7],
         "font-family": 'raleway',
         'font-size': '17pt'
     })
-    // css(tabsContainer, {
-    //     'background-color': "black"
-    // })
 }
 
 //Init is called when the window loads.
@@ -459,7 +524,7 @@ async function init() {
             else if (window.location.href.indexOf("studentmyday/progress") > -1) {
                 setTimeout(() => {progressPage();}, 500);
             }
-            else if (window.location.href.indexOf("academicclass") > -1) {
+            else if (window.location.href.indexOf("#academicclass") > -1 || window.location.href.indexOf("#advisorypage") > -1 || window.location.href.indexOf("#activitypage") > -1) {
                 setTimeout(() => {classPage();}, 500);
             }
             setTimeout(() => {loop();}, 800);
