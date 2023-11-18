@@ -40,7 +40,7 @@ function file(name) {
 }
 
 const darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
-const lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#a4b7ff", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
+const lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#6c77a1", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
 let userScheme = null;
 
 chrome.runtime.onMessage.addListener(
@@ -171,7 +171,7 @@ async function assignmentCenter() {
     try {
         dateDisplay.remove();
         uselessButtons1.remove();
-        uselessButton2.remove();
+        //uselessButton2.remove();
         uselessButton3.remove();
     }
     catch(e){}
@@ -389,66 +389,27 @@ async function progressPage() {
 }
 
 function classPage() {
-    let titleHeader = document.getElementsByClassName("section-heading");
-    let tileTitle = document.getElementsByClassName("bb-tile-title");
-    let contentSection = document.getElementsByClassName("bb-tile-content-section");
-    let textHeader = document.getElementsByClassName("bb-page-heading")[0];
-    let tileSectionHeader = document.getElementsByClassName("bb-tile-header");
-    let statusFilterItem = document.getElementsByClassName("status-filter-item");
-    let bulletinTile = document.getElementsByClassName("thumbnail bulletin");
-    let leadText = document.getElementsByClassName("lead");
-    let spanText = document.getElementsByTagName("span");
-    let tagTileTitles = document.getElementsByTagName("h2");
-    let topicTiles = document.getElementsByClassName("col-md-3");
-    let topicTileKids = [];
-    var filterButtons = [];
+    const titleHeader = document.getElementsByClassName("section-heading");
+    const tileTitle = document.getElementsByClassName("bb-tile-title");
+    const textHeader = document.getElementsByClassName("bb-page-heading")[0];
+    const tileSectionHeader = document.getElementsByClassName("bb-tile-header");
+    const topicTiles = document.getElementsByClassName("col-md-3");
+    const subTitle = document.getElementById("section-description-content").querySelector(".lead");
+    const filtersDiv = document.getElementsByClassName("ch");
 
-    for (const i in statusFilterItem) {
-        try {
-            filterButtons.push(statusFilterItem[i].querySelector('a').querySelector('h5').querySelector('div').querySelector('div'));
-        }
-        catch(e){}
-        try {
-            filterButtons.push(statusFilterItem[i].querySelector('a').querySelector('div').querySelector('div'));
-        }catch(e){}
-    }
     for (const i in topicTiles) {
         try {
-            console.log(topicTiles[i].children[0]);
             topicTiles[i].children[0].style["background-color"] = userScheme[1];
             topicTiles[i].children[0].style["border"] = "2px solid " + userScheme[7];
             topicTiles[i].children[0].style["border-radius"] = "10px";
         }
         catch(e){}
     }
-    for (const i in spanText) {
-        try {
-            if(spanText[i].textContent.length > 1 && spanText[i].textContent * 0 != 0) {
-                css(spanText[i], {
-                    "color": userScheme[7]
-                })
-            }
-        }
-        catch(e){}
-    }
-
-    bulkedit(bulletinTile, {
-        "background-color": userScheme[0]
-    }, "elements", null);
-    bulkedit(leadText, {
+    css(subTitle, {
         "color": userScheme[7]
-    }, "elements", null);
-    bulkedit(tagTileTitles, {
-        "font-family": "raleway",
-        "color": userScheme[7]
-    }, "elements", null);
-    bulkedit(filterButtons, {
-        "line-height": "5px"
-    }, "elements", null);
-    bulkedit(contentSection, {
-        "border": "2px solid " + userScheme[4],
-        "border-bottom-left-radius": "15px",
-        "border-bottom-right-radius": "15px"
+    })
+    bulkedit(filtersDiv, {
+        "border-color": "transparent"
     }, "elements", null);
     bulkedit(tileTitle, {
         "border": "2px solid " + userScheme[7],
