@@ -396,6 +396,7 @@ function classPage() {
     const topicTiles = document.getElementsByClassName("col-md-3");
     const subTitle = document.getElementById("section-description-content").querySelector(".lead");
     const filtersDiv = document.getElementsByClassName("ch");
+    const bulletin = document.getElementsByClassName("thumbnail bulletin");
 
     for (const i in topicTiles) {
         try {
@@ -407,6 +408,9 @@ function classPage() {
     }
     css(subTitle, {
         "color": userScheme[7]
+    })
+    bulkedit(bulletin, {
+        "background-color": userScheme[9]
     })
     bulkedit(filtersDiv, {
         "border-color": "transparent"
