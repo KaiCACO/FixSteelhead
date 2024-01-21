@@ -13,21 +13,21 @@ function updateInjectedStyles() {
         "body": ["background-color: " + userScheme[5]],
         "#site-header-container": ["background-color: " + userScheme[10]],
         "#site-nav-container": ["background-color: " + userScheme[0]],
-        //"h5": ["color: " + userScheme[8], "margin: none"],
         ".title": ["color: white"],
-        ".pri-100-fgc": ["color: " + userScheme[7], "font-family: nunito"],
-        ".caret": ["color: " + userScheme[7]],
-        ".for-search": ["color: white"],
-        ".desc": ["color: " + userScheme[7], "font-family: ralewayThin"],
+        "h1": ["font-family: nunito"],
+        "h2": ["font-family: nunito"],
+        "#site-nav .pri-100-fgc": ["color: " + userScheme[7], "font-family: nunito"],
+        ".topnav .caret": ["color: " + userScheme[7]],
+        "#site-nav-container .desc": ["color: " + userScheme[7], "font-family: ralewayThin"],
         ".assignment-detail-link": ["color: " + userScheme[3], "font-family: raleway"],
-        ".bb-tile-title": ["border-top-left-radius: 35px", "border-top-right-radius: 35px", "border: 2px solid black", "background-color: " + userScheme[10]],
+        ".bb-tile-title": ["border-top-left-radius: 25px", "border-top-right-radius: 25px", "border: 2px solid black", "background-color: " + userScheme[10]],
         ".bb-tile-header": ["color: white", "font-family: nunito"],
-        "td": ["font-family: ralewayThin", "color: " + userScheme[7]],
-        ".bb-tile-content": ["border-bottom-left-radius: 35px", "border-bottom-right-radius: 35px", "border: 2px solid black", "border-top: none", "background-color: " + userScheme[2]],
+        ".bb-tile-content td": ["font-family: ralewayThin", "color: " + userScheme[7]],
+        ".bb-tile-content": ["border-bottom-left-radius: 25px", "border-bottom-right-radius: 25px", "border: 2px solid black", "border-top: none", "background-color: " + userScheme[2]],
         "#courses .row": ["background-color: " + userScheme[2]],
-        "#courses .row:nth-child(odd)": ["background-color: " + userScheme[4], "border-radius: 25px"],
+        "#courses .row:nth-child(odd)": ["background-color: " + userScheme[4], "border-radius: 20px"],
         ".table-striped>tbody>tr:nth-of-type(odd)": ["background-color: " + userScheme[4]],
-        "#courses .row:nth-child(odd)": ["background-color: " + userScheme[4], "border-radius: 25px"],
+        "#courses .row:nth-child(odd)": ["background-color: " + userScheme[4], "border-radius: 20px"],
         ".topnav-icon": ["color: white"],
         ".bb-action-bar": ["background-color: " + userScheme[0], "border: none", "padding: 10px"],
         ".btn-default": ["background-color: " + userScheme[9], "color: " + userScheme[7], "border: none", "box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7)"],
@@ -36,8 +36,8 @@ function updateInjectedStyles() {
         "select.input-sm": ["background-color: " + userScheme[9], "color: " + userScheme[7], "border: none", "box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7)"],
         ".add-existing-items-header": ["background-color: " + userScheme[0], "border: none", "padding: 10px"],
         "thead": ["border: none"],
-        "th": ["color: " + userScheme[7], "border-radius: 0px", "background-color: transparent"],
-        ".table thead": ["background-color: transparent"],
+        ".bb-tile-content th": ["color: " + userScheme[7], "border-radius: 0px", "background-color: transparent", "background-image: none"],
+        ".table thead": ["background-color: transparent", "background-image: none"],
         ".assignment-table-sort": ["color: " + userScheme[7]],
         ".day": ["color: black"],
         ".btn-link": ["color: " + userScheme[3]],
@@ -53,7 +53,6 @@ function updateInjectedStyles() {
         ".bb-page-heading": ["color: white", "font-family: nunito"],
         ".lead": ["color: white", "transform: translateY(5px)"],
         ".bulletin": ["background-color: " + userScheme[10], "border: none", "border-radius: 15px", "box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7)", "color: " + userScheme[7]],
-        "h2": ["color: " + userScheme[7], "font-family: nunito"],
         ".whiteContainer1 text-center": ["background-color: " + userScheme[9]],
         ".showGrade": ["visibility: shown", "color: " + userScheme[7]],
         ".pull-left strong": ["color: " + userScheme[7]],
@@ -72,6 +71,23 @@ function updateInjectedStyles() {
         ".subnav span": ["color: black", "font-family: raleway"],
         "#assignment-center .col-md-8": ["opacity: 0", "pointer-events: none"],
         ".col-md-3 h4": ["color: " + userScheme[7]],
+        ".col-md-3 h5": ["color: " + userScheme[7]],
+        ".col-md-12 .mb-10 strong": ["color: " + userScheme[7]],
+        "#collapseempty": ["color: " + userScheme[7]],
+        "#col-main .schedule-list .pl-10": ["color: " + userScheme[7]],
+        ".root-nav-item .fa-caret-down": ["color: " + userScheme[7]],
+        ".bulletin li": ["color: " + userScheme[7]],
+        "ul.nav.nav-tabs.nav-stacked": ["background-color: transparent", "background-image: none"],
+        ".bb-tile-content .label": ["line-height: 0.9", "transform: translateY(-5px)"],
+        ".bb-tile-content .assignment-date-range-filter": ["margin-top: 25px"],
+        ".bb-action-bar .bb-deemphasized": ["color: " + userScheme[7]],
+        ".calGroup .bb-tile-title": ["border-top-left-radius: 10px", "border-top-right-radius: 10px", "padding-top: 20px"],
+        ".calGroup .bb-tile-content": ["border-bottom-left-radius: 10px", "border-bottom-right-radius: 10px"],
+        ".bb-tile-content .bb-tile-content-section": ["border: none"],
+        ".bb-tile-content #total-message": ["color: " + userScheme[7]],
+        "#site-search-input": ["background-color: " + userScheme[4], "color: " + userScheme[7], "border-radius: 5px", "padding: 2px"],    
+        ".bb-tile-content .bb-tile-content-section": ["color: " + userScheme[7]],
+        ".bb-tile-content .breadcrumb": ["background-color: unset"]
     };    
 }
 
@@ -192,6 +208,12 @@ function misc() {
         wellsm.querySelector("label").remove();
     }
     catch(e){}
+    try {
+        if (document.getElementById("site-search-input").parentElement.parentElement.getAttribute("style").includes("block")) {
+            document.getElementById("site-search-input").parentElement.parentElement.setAttribute("style", "display: block; background-color: rgba(0, 0, 0, 0.5)!important; box-shadow: none!important; border: none!important; border-radius: 5px!important;");
+        }
+    }
+    catch(e){}
 }
 
 function replaceHeaderImage(eid, str) {
@@ -236,11 +258,21 @@ async function init() {
     });
 }
 
+function autoLogin() {
+    if(window.location.href.includes("cascadesacademy.myschoolapp.com/app#login")) {
+        try {
+            document.getElementById("nextBtn").click();
+        }
+        catch(e){}
+    }
+}
+
 function loop() {
     updateInjectedStyles();
     addStyles(injectedStyles);
     injectFonts();
     replaceImages();
+    autoLogin();
     misc();
     setTimeout(loop, loopDelay);
 }
