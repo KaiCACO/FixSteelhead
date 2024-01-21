@@ -87,7 +87,9 @@ function updateInjectedStyles() {
         ".bb-tile-content #total-message": ["color: " + userScheme[7]],
         "#site-search-input": ["background-color: " + userScheme[4], "color: " + userScheme[7], "border-radius: 5px", "padding: 2px"],    
         ".bb-tile-content .bb-tile-content-section": ["color: " + userScheme[7]],
-        ".bb-tile-content .breadcrumb": ["background-color: unset"]
+        ".bb-tile-content .breadcrumb": ["background-color: unset"],
+        ".whiteContainer1 h5": ["color: " + userScheme[8]],
+        ".whiteContainer1.text-center": ["border: none", "box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4)", "border-radius: 5px", "padding-top: 5px"],
     };    
 }
 
@@ -120,7 +122,7 @@ function combineCSSProperties(css1, css2) {
       .join(' ');
   
     return combinedCSS;
-  }
+}
 
 function addStyles(sheet) {
     for (const selector in sheet) {
@@ -214,6 +216,20 @@ function misc() {
         }
     }
     catch(e){}
+    try {
+        if(window.location.href.includes("topics")) {
+            const topicsTiles = document.querySelector("#academicclassmaincontainer");
+            let tiles = [];
+            topicsTiles.querySelector("div").querySelectorAll(".row").forEach((e)=>{(e.querySelectorAll(".col-md-3")).forEach((t)=>{tiles.push(t)})});
+            tiles.forEach((e)=>{
+                e.querySelector("div").setAttribute("style", "background-color: " + userScheme[1] + "!important; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7)!important; border: 1px solid black; padding-top: 5px!important;");
+                e.querySelector(".thumbnail").setAttribute("style", "background-color: unset; border: none;");
+                e.querySelector(".fadeBox").remove();
+            })
+        }
+    }
+    catch(e){}
+
 }
 
 function replaceHeaderImage(eid, str) {
