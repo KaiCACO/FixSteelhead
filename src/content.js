@@ -22,6 +22,7 @@ function updateInjectedStyles() {
         ".assignment-detail-link": ["color: " + userScheme[3], "font-family: raleway"],
         ".bb-tile-title": ["border-top-left-radius: 25px", "border-top-right-radius: 25px", "border: 2px solid black", "background-color: " + userScheme[10]],
         ".bb-tile-header": ["color: white", "font-family: nunito"],
+        ".bb-tile-title .bb-tile-header-with-content .bb-tile-header": ["text-align: center"],
         ".bb-tile-content td": ["font-family: ralewayThin", "color: " + userScheme[7]],
         ".bb-tile-content": ["border-bottom-left-radius: 25px", "border-bottom-right-radius: 25px", "border: 2px solid black", "border-top: none", "background-color: " + userScheme[2]],
         "#courses .row": ["background-color: " + userScheme[2]],
@@ -90,7 +91,8 @@ function updateInjectedStyles() {
         ".bb-tile-content .breadcrumb": ["background-color: unset"],
         ".whiteContainer1 h5": ["color: " + userScheme[8]],
         ".whiteContainer1.text-center": ["border: none", "box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4)", "border-radius: 5px", "padding-top: 5px"],
-    };    
+        ".gradebook-analysis tr": ["background-color: transparent"],
+    };
 }
 
 function file(name) {
