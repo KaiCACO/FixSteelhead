@@ -66,6 +66,7 @@ function updateInjectedStyles() {
         ".sky-page-heading": ["color: " + userScheme[7]],
         "#directory-description-content": ["color: " + userScheme[7]],
         "#assignment-detail-assignment .bb-tile-content-section h4": ["color: " + userScheme[7]],
+        "#assignment-detail-assignment .bb-tile-content-section p": ["color: " + userScheme[7]],
         "#assignment-detail-assignment .bb-tile-content-section div": ["color: " + userScheme[7]],
         "#assignment-detail-assignment .bb-tile-content-section .btn": ["color: " + userScheme[7]],
         ".bulletin span": ["color: " + userScheme[7], "font-family: ralewayThin"],
@@ -92,6 +93,11 @@ function updateInjectedStyles() {
         ".whiteContainer1 h5": ["color: " + userScheme[8]],
         ".whiteContainer1.text-center": ["border: none", "box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4)", "border-radius: 5px", "padding-top: 5px"],
         ".gradebook-analysis tr": ["background-color: transparent"],
+        ".assignment-detail-header-info": ["color: " + userScheme[8]],
+        "tr th": ["color: " + userScheme[7]],
+        "#sub-button": ["display: block"],
+        "save-button": ["display: block"],
+        "#online-submission-attached-files tr h5": ["color: " + userScheme[7], "font-family: nunito", "text-align: center"],
     };
 }
 
@@ -183,10 +189,6 @@ function replaceImages() {
 
 function misc() {
     try {
-        document.getElementById("__AjaxAntiForgery").remove();
-    }
-    catch(e){}
-    try {
         document.getElementById("small-date-display-label").remove();
     }
     catch(e){}
@@ -231,7 +233,18 @@ function misc() {
         }
     }
     catch(e){}
-
+    try {
+        document.getElementById("showHideGrade").remove();
+    }
+    catch(e){}
+    try {
+        document.querySelectorAll(".btn-group strong").forEach((e)=>{
+            if(e.getAttribute("style").includes("#c70000")) {
+                e.setAttribute("style", "color:ff0000!important");
+            }
+        })
+    }
+    catch(e){}
 }
 
 function replaceHeaderImage(eid, str) {
