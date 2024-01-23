@@ -290,12 +290,18 @@ async function init() {
 }
 
 function autoLogin() {
-    if(window.location.href.includes("cascadesacademy.myschoolapp.com/app#login")) {
-        try {
+    try {
+        if
+        (
+            (window.location.href.includes("/app#login") || window.location.href.includes("/app/student#login"))
+            && (document.getElementById("Username").value.includes("@cascadesacademy.org"))
+        ) 
+        {
+            document.getElementById("remember").checked = true;
             document.getElementById("nextBtn").click();
         }
-        catch(e){}
     }
+    catch(e){console.error(e)}
 }
 
 function loop() {
@@ -308,6 +314,6 @@ function loop() {
     setTimeout(loop, loopDelay);
 }
 
-const loopDelay = 1000
+const loopDelay = 500
 init();
 loop();
