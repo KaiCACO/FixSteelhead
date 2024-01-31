@@ -1,5 +1,5 @@
-const darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59'];
-const lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#6c77a1", '#000000', '#ffffff', "#d7e0fc", '#1e2d59'];
+const darkTheme = ['#293b72', '#262935', '#414a72', '#9bb4ff', '#3f4869', '#2b2b3a', '#323a56', '#ffffff', '#000000', '#1e2d59', '#1e2d59', '#1f3882'];
+const lightTheme = ['#ffffff', "#bbc6f2", "#e4e7f0", '#5579e6', "#f0f4ff", "#ffffff", "#6c77a1", '#000000', '#ffffff', "#d7e0fc", '#1e2d59', '#1f3882'];
 let userScheme = darkTheme;
 
 const raleway = new FontFace("raleway", "url(" + file('Raleway.ttf') + ")");
@@ -98,6 +98,7 @@ function updateInjectedStyles() {
         "#sub-button": ["display: block"],
         "save-button": ["display: block"],
         "#online-submission-attached-files tr h5": ["color: " + userScheme[7], "font-family: nunito", "text-align: center"],
+        ".btn-group .active": ['background-color: ' + userScheme[11]]
     };
 }
 
