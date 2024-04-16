@@ -98,7 +98,9 @@ function updateInjectedStyles() {
         "#sub-button": ["display: block"],
         "save-button": ["display: block"],
         "#online-submission-attached-files tr h5": ["color: " + userScheme[7], "font-family: nunito", "text-align: center"],
-        ".btn-group .active": ['background-color: ' + userScheme[11]]
+        ".btn-group .active": ['background-color: ' + userScheme[11]],
+        "#assignmentFilterStartDatePicker": ["color: " + userScheme[10], "min-width: 100px", "border-radius: 5px", "transform: translateX(5px)"],
+        "#assignmentFilterEndDatePicker": ["color: " + userScheme[10], "min-width: 100px", "border-radius: 5px", "transform: translateX(5px)"],
     };
 }
 
@@ -189,6 +191,17 @@ function replaceImages() {
 }
 
 function misc() {
+    inputs = document.querySelectorAll("input")
+    for (const e in inputs) {
+        if (inputs[e].type == "text") {
+            inputs[e].style.color == "black!important";
+            inputs[e].style["background-color"] == "white!important";
+        }
+    }
+    try {
+        document.getElementById("-more-button").click()
+    }
+    catch(e){}
     try {
         document.getElementById("small-date-display-label").remove();
     }
@@ -306,12 +319,14 @@ function autoLogin() {
 }
 
 function loop() {
-    updateInjectedStyles();
-    addStyles(injectedStyles);
-    injectFonts();
-    replaceImages();
-    autoLogin();
-    misc();
+    if (!window.location.href.includes("student#schoolform")) {
+        updateInjectedStyles();
+        addStyles(injectedStyles);
+        injectFonts();
+        replaceImages();
+        autoLogin();
+        misc();
+    }
     setTimeout(loop, loopDelay);
 }
 

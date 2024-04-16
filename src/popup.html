@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <!-- Code created by Kai Sereni in February 2023 -->
 <html>
-<link rel="stylesheet" type="text/css" href="resources/styles.css">
+<head>
+    <link rel="stylesheet" type="text/css" href="resources/styles.css">
+    <meta charset="utf-8">
+</head>
     <body id="body">
 		<div class="dropdown-wrapper">
         	<img src="resources/bar-icon.png" width="40px" height="40px" class="dropdown" alt="bars-icon">
@@ -11,19 +14,18 @@
 				<button href="#defaults" id="defaults-button">Default Filters</button>
 			</div>
 		</div>
-        <div id="home" class="tab">
-            <h1 id="title">This browser extension fixes Steelhead Connect's ugly UI.</h1>
-            <h3 id="subtitle">Coded by Kai Sereni in February 2023.</h3>
-            <center>
-                <a href="https://chromewebstore.google.com/detail/fix-steelhead-frontend/cnjgchceepjloehgdimhmgmihbjjnbma/reviews">Click here to leave a review :3</a><br>
-                <a href="mailto:kaisereni@cascadesacademy.org">If you find a bug, let me know</a>
-            </center>
-            <p id="text">To read all of this browser extension's documented code, go to the GitHub.</p>
-            <center>
-                <a href="https://github.com/KaiCACO/FixSteelhead" target="_blank">
-                    <img src="resources/github-icon.png" id="github-icon" alt="github-icon">
-                </a>
-            </center>
+        <div id="home" class="centered">
+            <h1 id="title" class="centered">This browser extension improves Steelhead Connect's UI.</h1>
+            <h3 id="subtitle" class="centered">Coded by Kai Sereni starting in February 2023.</h3>
+            <a href="https://chromewebstore.google.com/detail/fix-steelhead-frontend/cnjgchceepjloehgdimhmgmihbjjnbma/reviews" class="centered">Click here to leave a review</a>
+            <a href="mailto:kaisereni@cascadesacademy.org" class="centered">If you find a bug, let me know</a>
+            <p id="text" class="centered">To read all of this browser extension's documented code, go to the GitHub.</p>
+            <a href="https://github.com/KaiCACO/FixSteelhead" target="_blank" class="centered">
+                <img src="resources/github-icon.png" id="github-icon" alt="github-icon">
+            </a>
+            <div style="position: absolute; width: 100%;" class="center">
+                <p style="font-size: 8pt; bottom: 0; position: relative; text-align: center; color: rgb(64, 64, 64);" class="center">© Kai Sereni 2023. This extension is not associated or affiliated with Cascades Academy or Blackbaud.</p>
+            </div>
         </div>
         <div id="defaults" class="tab">
             <h2>Default filters</h2>
@@ -31,15 +33,13 @@
         </div>
         <div id="appearance" class="tab">
             <h2>Customize appearance</h2>
-            <center>
-                <div id="theme-switch">
-                    <label class="switch">
-                        <input type="checkbox" id="theme-checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <h3>Theme</h3>
-                </div>
-            </center>
+            <div id="theme-switch">
+                <label class="switch">
+                    <input type="checkbox" id="theme-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <h3>Theme</h3>
+            </div>
         </div>
     <script type="text/javascript" src="resources/popup.js"></script>
     </body>

@@ -22,6 +22,24 @@
   border-color: rgb(110, 111, 126);
   font-family: 'Roboto Mono', monospace;
   font-weight: 400;
+  position: relative;
+  display: block;
+}
+
+a {
+  display: flex;
+  top: 0;
+}
+
+p {
+  display: flex;
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
 }
 
 .dropdown {
@@ -106,7 +124,7 @@
 }
 
 
-#title {
+h1 {
   text-align: center;
   color:rgb(0, 14, 90);
 	padding-left: 10px;
@@ -114,12 +132,12 @@
 	padding-top: 0px;
 }
 
-#subtitle {
+h3 {
   text-align: center;
   color:rgb(0, 23, 151);
 }
 
-#text {
+#a {
   padding-top: 15px;
   text-align: center;
   font-size: 12pt;
